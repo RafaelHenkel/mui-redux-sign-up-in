@@ -2,13 +2,14 @@ import GppGoodIcon from '@mui/icons-material/GppGood';
 import { Button, Container, Grid2 as Grid, Paper, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
 
 function SignUp() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const selector = useAppSelector(state => state.users);
@@ -41,6 +42,7 @@ function SignUp() {
       setEmail('');
       setPassword('');
       setPasswordConfirm('');
+      navigate('/');
     } else {
       alert('As senhas não conferem');
     }

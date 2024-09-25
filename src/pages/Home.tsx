@@ -20,13 +20,16 @@ function Home() {
   const selector = useAppSelector(state => state.users);
 
   function handleLogin() {
-    selector.map(user => {
-      if (user.email === email && user.password === password) {
-        console.log('Login efetuado com sucesso');
-      } else {
-        console.log('E-mail ou senha incorretos');
-      }
-    });
+    const findEmail = selector.find(user => user.email === email);
+    if (!findEmail) {
+      alert('E-mail ou senha incorretos');
+      return;
+    }
+    if (findEmail.password === password) {
+      alert('Login efetuado com sucesso');
+    } else {
+      alert('E-mail ou senha incorretos');
+    }
   }
   return (
     <>
