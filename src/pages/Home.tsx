@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Checkbox,
   Container,
@@ -16,19 +17,30 @@ import { useAppSelector } from '../store/hooks';
 function Home() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loginConfirm, setLoginConfirm] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<boolean>(false);
 
   const selector = useAppSelector(state => state.users);
 
   function handleLogin() {
     const findEmail = selector.find(user => user.email === email);
     if (!findEmail) {
-      alert('E-mail ou senha incorretos');
+      setLoginError(true);
+      setTimeout(() => {
+        setLoginConfirm(false);
+      }, 2000);
       return;
     }
     if (findEmail.password === password) {
-      alert('Login efetuado com sucesso');
+      setLoginConfirm(true);
+      setTimeout(() => {
+        setLoginConfirm(false);
+      }, 2000);
     } else {
-      alert('E-mail ou senha incorretos');
+      setLoginError(true);
+      setTimeout(() => {
+        setLoginConfirm(false);
+      }, 2000);
     }
   }
   return (
@@ -47,6 +59,8 @@ function Home() {
             <Grid size={12} display={'flex'} justifyContent={'center'}>
               <Typography variant="h3">Sign in</Typography>
             </Grid>
+            <Grid size={12}>{loginError ? <Alert severity="error">E-mail ou senha incorretos.</Alert> : ''}</Grid>
+            <Grid size={12}>{loginConfirm ? <Alert severity="success">Login efetuado com sucesso!</Alert> : ''}</Grid>
             <Grid size={12}>
               <TextField
                 id="outlined-basic"

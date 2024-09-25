@@ -1,5 +1,5 @@
 import GppGoodIcon from '@mui/icons-material/GppGood';
-import { Button, Container, Grid2 as Grid, Paper, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, Grid2 as Grid, Paper, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +9,9 @@ function SignUp() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const [signUpConfirm, setSignUpConfirm] = useState<boolean>(false);
+  const [signUpError, setSignUpError] = useState<boolean>(false);
+  const [messageError, setmessageError] = useState<string>('');
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -17,7 +20,12 @@ function SignUp() {
   function validEmail() {
     const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
     if (!emailValid) {
-      alert('E-mail inválido');
+      setSignUpError(true);
+      setmessageError('E-mail inválido');
+      setTimeout(() => {
+        setSignUpError(false);
+        setmessageError('');
+      }, 2000);
       return;
     }
     handleSignUp();
@@ -25,26 +33,49 @@ function SignUp() {
 
   function handleSignUp() {
     if (email === '' || password === '' || passwordConfirm === '') {
-      alert('Preencha todos os campos');
+      setSignUpError(true);
+      setmessageError('Preencha todos os campos');
+      setTimeout(() => {
+        setSignUpError(false);
+        setmessageError('');
+      }, 2000);
       return;
     }
     if (password.length < 6) {
-      alert('A senha deve ter no mínimo 6 caracteres');
+      setSignUpError(true);
+      setmessageError('A senha deve ter no mínimo 6 caracteres');
+      setTimeout(() => {
+        setSignUpError(false);
+        setmessageError('');
+      }, 2000);
       return;
     }
     if (selector.find(user => user.email === email)) {
-      alert('E-mail já cadastrado');
+      setSignUpError(true);
+      setmessageError('E-mail já cadastrado');
+      setTimeout(() => {
+        setSignUpError(false);
+        setmessageError('');
+      }, 2000);
       return;
     }
     if (password === passwordConfirm) {
       dispatch({ type: 'users/addUser', payload: { email, password } });
-      alert('Usuário cadastrado com sucesso');
+      setSignUpConfirm(true);
       setEmail('');
       setPassword('');
       setPasswordConfirm('');
-      navigate('/');
+      setTimeout(() => {
+        setSignUpConfirm(false);
+        navigate('/');
+      }, 2000);
     } else {
-      alert('As senhas não conferem');
+      setSignUpError(true);
+      setmessageError('As senhas não conferem');
+      setTimeout(() => {
+        setSignUpError(false);
+        setmessageError('');
+      }, 2000);
     }
   }
   return (
@@ -63,6 +94,8 @@ function SignUp() {
             <Grid size={12} display={'flex'} justifyContent={'center'}>
               <Typography variant="h3">Sign up</Typography>
             </Grid>
+            <Grid size={12}>{signUpError ? <Alert severity="error">{messageError}</Alert> : ''}</Grid>
+            <Grid size={12}>{signUpConfirm ? <Alert severity="success">Login efetuado com sucesso!</Alert> : ''}</Grid>
             <Grid size={12}>
               <TextField
                 id="outlined-basic"
