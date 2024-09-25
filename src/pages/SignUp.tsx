@@ -17,11 +17,21 @@ function SignUp() {
   const dispatch = useDispatch();
   const selector = useAppSelector(state => state.users);
 
-  function validEmail() {
+  function validInputs() {
     const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
+    const passwordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/.test(password);
     if (!emailValid) {
       setSignUpError(true);
       setmessageError('E-mail inválido');
+      setTimeout(() => {
+        setSignUpError(false);
+        setmessageError('');
+      }, 2000);
+      return;
+    }
+    if (!passwordValid) {
+      setSignUpError(true);
+      setmessageError('Senha inválida');
       setTimeout(() => {
         setSignUpError(false);
         setmessageError('');
@@ -152,7 +162,7 @@ function SignUp() {
               />
             </Grid>
             <Grid size={12}>
-              <Button variant="contained" onClick={validEmail} fullWidth>
+              <Button variant="contained" onClick={validInputs} fullWidth>
                 Cadastrar
               </Button>
             </Grid>
