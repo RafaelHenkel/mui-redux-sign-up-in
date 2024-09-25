@@ -94,8 +94,24 @@ function SignUp() {
             <Grid size={12} display={'flex'} justifyContent={'center'}>
               <Typography variant="h3">Sign up</Typography>
             </Grid>
-            <Grid size={12}>{signUpError ? <Alert severity="error">{messageError}</Alert> : ''}</Grid>
-            <Grid size={12}>{signUpConfirm ? <Alert severity="success">Login efetuado com sucesso!</Alert> : ''}</Grid>
+            <Grid size={12}>
+              {signUpError ? (
+                <Alert sx={{ position: 'absolute', top: '0', right: '0', margin: '20px' }} severity="error">
+                  {messageError}
+                </Alert>
+              ) : (
+                ''
+              )}
+            </Grid>
+            <Grid size={12}>
+              {signUpConfirm ? (
+                <Alert sx={{ position: 'absolute', top: '0', right: '0', margin: '20px' }} severity="success">
+                  Login efetuado com sucesso!
+                </Alert>
+              ) : (
+                ''
+              )}
+            </Grid>
             <Grid size={12}>
               <TextField
                 id="outlined-basic"

@@ -59,8 +59,24 @@ function Home() {
             <Grid size={12} display={'flex'} justifyContent={'center'}>
               <Typography variant="h3">Sign in</Typography>
             </Grid>
-            <Grid size={12}>{loginError ? <Alert severity="error">E-mail ou senha incorretos.</Alert> : ''}</Grid>
-            <Grid size={12}>{loginConfirm ? <Alert severity="success">Login efetuado com sucesso!</Alert> : ''}</Grid>
+            <Grid size={12}>
+              {loginError ? (
+                <Alert sx={{ position: 'absolute', top: '0', right: '0', margin: '20px' }} severity="error">
+                  E-mail ou senha incorretos.
+                </Alert>
+              ) : (
+                ''
+              )}
+            </Grid>
+            <Grid size={12}>
+              {loginConfirm ? (
+                <Alert sx={{ position: 'absolute', top: '0', right: '0', margin: '20px' }} severity="success">
+                  Login efetuado com sucesso!
+                </Alert>
+              ) : (
+                ''
+              )}
+            </Grid>
             <Grid size={12}>
               <TextField
                 id="outlined-basic"
