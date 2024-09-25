@@ -19,7 +19,7 @@ function SignUp() {
 
   function validInputs() {
     const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
-    const passwordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/.test(password);
+    const passwordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{6,}$/.test(password);
     if (!emailValid) {
       setSignUpError(true);
       setmessageError('E-mail inválido');
@@ -79,6 +79,7 @@ function SignUp() {
       }, 2000);
     }
   }
+
   return (
     <>
       <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
