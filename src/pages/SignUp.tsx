@@ -51,15 +51,6 @@ function SignUp() {
       }, 2000);
       return;
     }
-    if (password.length < 6) {
-      setSignUpError(true);
-      setmessageError('A senha deve ter no mínimo 6 caracteres');
-      setTimeout(() => {
-        setSignUpError(false);
-        setmessageError('');
-      }, 2000);
-      return;
-    }
     if (selector.find(user => user.email === email)) {
       setSignUpError(true);
       setmessageError('E-mail já cadastrado');
