@@ -1,6 +1,6 @@
 const navigation = [
   { key: 'home', label: 'Home', url: '/' },
-  { key: 'products', label: 'Produtos', url: '/products' },
+  { key: 'product', label: 'Produto', url: '/product' },
 ];
 
 export default navigation;
