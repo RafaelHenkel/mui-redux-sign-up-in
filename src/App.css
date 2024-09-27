@@ -9,6 +9,7 @@ body {
   font-weight: 400;
 
   background-color: #ffffff;
+  overflow-y: hidden;
 }
 
 h1 {

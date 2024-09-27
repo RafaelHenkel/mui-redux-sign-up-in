@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 interface ProductsType {
   id?: number;
   name: string;
-  price: string;
+  price: number;
   amount: number;
 }
 
@@ -14,7 +14,7 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      state.push({ ...action.payload, id: state.length + 1 });
+      state.push({ ...action.payload, id: state.length + 1, amount: 1 });
     },
     addProductToCart: (state, action) => {
       const searchProduct = state.find(product => product.id === action.payload.id);
@@ -25,7 +25,7 @@ const productsSlice = createSlice({
     },
     delProductToCart: (state, action) => {
       const searchProduct = state.find(product => product.id === action.payload.id);
-      if (searchProduct) {
+      if (searchProduct && searchProduct.amount > 1) {
         searchProduct.amount -= 1;
         return;
       }
