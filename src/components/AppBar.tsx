@@ -18,9 +18,7 @@ import { Badge, BadgeProps, Divider } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useAppSelector } from '../store/hooks';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   '& .MuiBadge-badge': {
     right: -3,
     top: 13,

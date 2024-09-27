@@ -1,18 +1,13 @@
 import { Button, Container, Grid2 as Grid, Input, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addProduct, addProductToCart } from '../store/models/ProductsSlice';
+import { addProduct } from '../store/models/ProductsSlice';
 import { useState } from 'react';
 import ResponsiveAppBar from '../components/AppBar';
-import { useAppSelector } from '../store/hooks';
 
 function Home() {
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<string>('');
-  const selector = useAppSelector(state => state.products);
   const dispatch = useDispatch();
-  function handleAddProduct(item: any) {
-    dispatch(addProductToCart(item));
-  }
 
   function handleSubmit() {
     dispatch(addProduct({ name, price }));
